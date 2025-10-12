@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Str;
 use App\Models\Utilisateur;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -52,6 +53,68 @@ class UtilisateurController extends Controller
                 'type_utilisateur' => $utilisateur->type_utilisateur,
             ]
         ], 201);
+    }
+
+    public function login(Request $request)
+    {
+        // ✅ Validate input
+        $validated = $request->validate([
+            'email' => 'required|email',
+            'mot_de_passe' => 'required|string',
+        ]);
+
+        // ✅ Find the user by email
+        $utilisateur = Utilisateur::where('email', $validated['email'])->first();
+
+        if (!$utilisateur) {
+            return response()->json(['message' => 'Email introuvable'], 404);
+        }
+
+        // ✅ Check password
+        if (!Hash::check($validated['mot_de_passe'], $utilisateur->mot_de_passe)) {
+            return response()->json(['message' => 'Mot de passe incorrect'], 401);
+        }
+
+        // ✅ Generate new API token
+        $token = Str::random(60);
+        $utilisateur->update(['api_token' => hash('sha256', $token)]);
+
+        // ✅ Return token and basic info
+        return response()->json([
+            'message' => 'Connexion réussie',
+            'data' => [
+                'id' => $utilisateur->id,
+                'nom' => $utilisateur->nom,
+                'prenom' => $utilisateur->prenom,
+                'email' => $utilisateur->email,
+                'type_utilisateur' => $utilisateur->type_utilisateur,
+                'api_token' => $token // client stores this
+            ]
+        ]);
+    }
+
+    public function verify(Request $request)
+    {
+        $token = $request->input("api_token");
+
+        $hashed = hash('sha256', $token);
+
+        $utilisateur = Utilisateur::where('api_token', $hashed)->first();
+        if (!$utilisateur) {
+            return response()->json(["message" => "token invalide"], 401);
+        }
+
+        return response()->json([
+            'valid' => true,
+            'message' => 'Token valide',
+            'data' => [
+                'id' => $utilisateur->id,
+                'nom' => $utilisateur->nom,
+                'prenom' => $utilisateur->prenom,
+                'email' => $utilisateur->email,
+                'type_utilisateur' => $utilisateur->type_utilisateur,
+            ]
+        ]);
     }
 
     /**

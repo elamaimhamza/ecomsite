@@ -6,13 +6,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class Utilisateur extends Model
 {
-     protected $table = 'utilisateurs';
+    protected $table = 'utilisateurs';
 
     protected $fillable = [
-        'nom', 'prenom', 'email', 'mot_de_passe', 'adresse', 'code_postal', 'ville', 'type_utilisateur'
+        'nom',
+        'prenom',
+        'email',
+        'mot_de_passe',
+        'adresse',
+        'code_postal',
+        'ville',
+        'api_token',
+        'type_utilisateur'
     ];
 
-    protected $hidden = ['mot_de_passe'];
+    protected $hidden = ['mot_de_passe', 'api_token'];
 
     // Un utilisateur a un panier
     public function panier()
