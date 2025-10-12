@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Utilisateur;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UtilisateurController extends Controller
 {
@@ -16,19 +17,41 @@ class UtilisateurController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'nom' => 'required|string|max:255',
+            'prenom' => 'required|string|max:255',
+            'email' => 'required|email|unique:utilisateurs,email',
+            'mot_de_passe' => 'required|string|min:6',
+            'adresse' => 'required|string|max:255',
+            'code_postal' => 'required|string|max:20',
+            'ville' => 'required|string|max:100',
+        ]);
+
+        $utilisateur = Utilisateur::create([
+            'nom' => $validated['nom'],
+            'prenom' => $validated['prenom'],
+            'email' => $validated['email'],
+            'mot_de_passe' => Hash::make($validated['mot_de_passe']),
+            'adresse' => $validated['adresse'],
+            'code_postal' => $validated['code_postal'],
+            'ville' => $validated['ville'],
+            'type_utilisateur' => 'Membre', // default value
+        ]);
+
+        return response()->json([
+            'message' => 'Utilisateur créé avec succès',
+            'data' => [
+                'id' => $utilisateur->id,
+                'nom' => $utilisateur->nom,
+                'prenom' => $utilisateur->prenom,
+                'email' => $utilisateur->email,
+                'type_utilisateur' => $utilisateur->type_utilisateur,
+            ]
+        ], 201);
     }
 
     /**
