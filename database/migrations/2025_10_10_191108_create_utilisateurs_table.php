@@ -11,18 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-       Schema::create('utilisateurs', function (Blueprint $table) {
+        Schema::create('utilisateurs', function (Blueprint $table) {
             $table->id();
             $table->string('nom');
             $table->string('prenom');
             $table->string('email')->unique();
             $table->string('mot_de_passe');
-            $table->string('adresse')->nullable();
-            $table->string('code_postal')->nullable();
-            $table->string('ville')->nullable();
+            $table->string('adresse');
+            $table->string('code_postal');
+            $table->string('ville');
             $table->enum('type_utilisateur', ['Visiteur', 'Membre', 'Gestionnaire'])->default('Visiteur');
             $table->timestamps();
-             });
+        });
     }
 
     /**
