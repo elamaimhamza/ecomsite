@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Genre;
 use App\Models\Produit;
 use Illuminate\Http\Request;
 
@@ -10,9 +11,25 @@ class ProduitController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        // Get the genre_id from request
+        $genreName = $request->input('genre'); // or $request->input('genre_id');
+
+        $genre =  Genre::where('nom', $genreName)->first();
+
+        // Filter products by genre if genre_id is provided
+        $produits = Produit::with(['genre', 'typeProduit'])
+            ->when($genre, function ($query, $genre) {
+                return $query->where('genre_id', $genre->id);
+            })
+            ->get();
+
+        return response()->json([
+            "message" => "fetched products",
+            "data" => $produits,
+            "Genre" => $genre
+        ]);
     }
 
     /**

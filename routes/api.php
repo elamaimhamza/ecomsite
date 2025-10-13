@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\UtilisateurController;
+use Database\Seeders\ProduitSeeder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,3 +20,6 @@ Route::middleware('auth.api')->group(function () {
     Route::get('/user', [UtilisateurController::class, 'show']);
     Route::put('/user', [UtilisateurController::class, 'update']);
 });
+
+Route::post('/produits', [ProduitController::class, 'index']);
+
