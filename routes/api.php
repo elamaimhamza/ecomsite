@@ -11,4 +11,4 @@ Route::get('/user', function (Request $request) {
 Route::post('/register', [UtilisateurController::class, 'store']);
 Route::post('/login', [UtilisateurController::class, 'login']);
 
-Route::post('/user/verify', [UtilisateurController::class, 'verify']);
+Route::post('/verify', [UtilisateurController::class, 'verify']);

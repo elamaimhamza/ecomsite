@@ -57,6 +57,7 @@ class UtilisateurController extends Controller
 
     public function login(Request $request)
     {
+
         // ✅ Validate input
         $validated = $request->validate([
             'email' => 'required|email',
@@ -66,13 +67,8 @@ class UtilisateurController extends Controller
         // ✅ Find the user by email
         $utilisateur = Utilisateur::where('email', $validated['email'])->first();
 
-        if (!$utilisateur) {
-            return response()->json(['message' => 'Email introuvable'], 404);
-        }
-
-        // ✅ Check password
-        if (!Hash::check($validated['mot_de_passe'], $utilisateur->mot_de_passe)) {
-            return response()->json(['message' => 'Mot de passe incorrect'], 401);
+        if (!$utilisateur || !Hash::check($validated['mot_de_passe'], $utilisateur->mot_de_passe)) {
+            return response()->json(['message' => 'Email ou Mot de pass incorrect'], 401);
         }
 
         // ✅ Generate new API token
@@ -95,15 +91,29 @@ class UtilisateurController extends Controller
 
     public function verify(Request $request)
     {
-        $token = $request->input("api_token");
+        // Get the Authorization header
+        $authorizationHeader = $request->header('Authorization');
 
-        $hashed = hash('sha256', $token);
-
-        $utilisateur = Utilisateur::where('api_token', $hashed)->first();
-        if (!$utilisateur) {
-            return response()->json(["message" => "token invalide"], 401);
+        // Check if the header exists and starts with "Bearer "
+        if (!$authorizationHeader || !str_starts_with($authorizationHeader, 'Bearer ')) {
+            return response()->json(["message" => "Authorization header missing or invalid"], 401);
         }
 
+        // Extract the token part (after "Bearer ")
+        $token = substr($authorizationHeader, 7);
+
+        // Hash the token
+        $hashed = hash('sha256', $token);
+
+        // Find the user by hashed token
+        $utilisateur = Utilisateur::where('api_token', $hashed)->first();
+
+        // If no user is found, return an error
+        if (!$utilisateur) {
+            return response()->json(["message" => "Token invalide"], 401);
+        }
+
+        // If valid, return user data
         return response()->json([
             'valid' => true,
             'message' => 'Token valide',
