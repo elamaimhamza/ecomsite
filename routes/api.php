@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UtilisateurController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -9,6 +10,6 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::post('/register', [UtilisateurController::class, 'store']);
-Route::post('/login', [UtilisateurController::class, 'login']);
+Route::post('/login', [AuthController::class, 'login']);
 
-Route::post('/verify', [UtilisateurController::class, 'verify']);
+Route::post('/verify', [AuthController::class, 'verify']);
