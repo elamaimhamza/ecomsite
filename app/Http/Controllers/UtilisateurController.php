@@ -58,9 +58,13 @@ class UtilisateurController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Utilisateur $utilisateur)
+    public function show(Request $request)
     {
-        //
+        $user = $request->get('auth_user'); // from middleware
+
+        return response()->json([
+            'user' => $user
+        ]);
     }
 
     /**
@@ -76,7 +80,29 @@ class UtilisateurController extends Controller
      */
     public function update(Request $request, Utilisateur $utilisateur)
     {
-        //
+
+        $user = $request->get('auth_user'); // same method
+
+        $validated = $request->validate([
+            'nom' => 'sometimes|string|max:255',
+            'prenom' => 'sometimes|string|max:255',
+            'email' => 'sometimes|email|unique:utilisateurs,email,' . $user->id,
+            'mot_de_passe' => 'sometimes|min:6|confirmed',
+            'adresse' => 'sometimes|string|max:255',
+            'code_postal' => 'sometimes|string|max:20',
+            'ville' => 'sometimes|string|max:100',
+        ]);
+
+        if (isset($validated['mot_de_passe'])) {
+            $validated['mot_de_passe'] = bcrypt($validated['mot_de_passe']);
+        }
+
+        $user->update($validated);
+
+        return response()->json([
+            'message' => 'Profil mis à jour avec succès.',
+            'user' => $user
+        ]);
     }
 
     /**

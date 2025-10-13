@@ -13,3 +13,8 @@ Route::post('/register', [UtilisateurController::class, 'store']);
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::post('/verify', [AuthController::class, 'verify']);
+
+Route::middleware('auth.api')->group(function () {
+    Route::get('/user', [UtilisateurController::class, 'show']);
+    Route::put('/user', [UtilisateurController::class, 'update']);
+});
