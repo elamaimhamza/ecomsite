@@ -22,4 +22,4 @@ Route::middleware('auth.api')->group(function () {
 });
 
 Route::post('/produits', [ProduitController::class, 'index']);
-
+Route::get('/produits/{id}', [ProduitController::class, 'show']);
