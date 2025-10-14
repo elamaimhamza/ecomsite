@@ -51,9 +51,10 @@ class ProduitController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Produit $produit)
+    public function show($id)
     {
-        //
+        $produit = Produit::with(['genre', 'typeProduit', 'referencement'])->findOrFail($id);
+        return response()->json($produit);
     }
 
     /**
