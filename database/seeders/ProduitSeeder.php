@@ -19,11 +19,12 @@ class ProduitSeeder extends Seeder
         $genres = Genre::pluck('id', 'nom')->toArray();
         $types = TypeProduit::pluck('id', 'nom')->toArray();
 
-        /* $produits = [
+        $produits = [
+            // HOMME
             [
                 'nom' => 'Polo bleu marine homme',
                 'description' => 'Polo élégant bleu marine en coton piqué, parfait pour un look raffiné et décontracté.',
-                'prix' => 179.00,
+                'prix' => 59.00,
                 'image' => 'polo_bleumarine_homme.avif',
                 'marque' => 'Sportify',
                 'stock' => 70,
@@ -33,7 +34,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'Polo bleu clair homme',
                 'description' => 'Polo bleu clair léger et confortable, idéal pour les journées estivales.',
-                'prix' => 169.00,
+                'prix' => 52.00,
                 'image' => 'polo_bleu_clair_homme.avif',
                 'marque' => 'UniWear',
                 'stock' => 85,
@@ -43,7 +44,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'Polo noir homme',
                 'description' => 'Polo noir intemporel avec coupe ajustée, un classique de la garde-robe masculine.',
-                'prix' => 179.00,
+                'prix' => 64.00,
                 'image' => 'polo_noir_homme.avif',
                 'marque' => 'Sportify',
                 'stock' => 65,
@@ -53,7 +54,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'Polo orange foncé homme',
                 'description' => 'Polo orange foncé vibrant, en tissu respirant pour un confort optimal.',
-                'prix' => 189.00,
+                'prix' => 55.00,
                 'image' => 'polo_orangefoncé_homme.avif',
                 'marque' => 'ColorLine',
                 'stock' => 50,
@@ -63,7 +64,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'Polo blanc homme',
                 'description' => 'Polo blanc classique, parfait pour un style propre et élégant en toute saison.',
-                'prix' => 179.00,
+                'prix' => 57.00,
                 'image' => 'polo_polo_blanc_homme.avif',
                 'marque' => 'UniWear',
                 'stock' => 90,
@@ -73,7 +74,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'Polo vert menthe homme',
                 'description' => 'Polo vert menthe rafraîchissant, idéal pour les tenues estivales légères.',
-                'prix' => 169.00,
+                'prix' => 53.00,
                 'image' => 'polo_vertmenthe_homme.avif',
                 'marque' => 'ColorLine',
                 'stock' => 75,
@@ -84,7 +85,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'T-shirt basique beige homme',
                 'description' => 'T-shirt basique beige en coton doux, idéal pour un look neutre et moderne.',
-                'prix' => 99.99,
+                'prix' => 29.99,
                 'image' => 'tshirt_basique_beige_homme.avif',
                 'marque' => 'UniWear',
                 'stock' => 110,
@@ -94,7 +95,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'T-shirt basique blanc homme',
                 'description' => 'T-shirt blanc classique 100% coton, un indispensable du dressing masculin.',
-                'prix' => 99.99,
+                'prix' => 25.99,
                 'image' => 'tshirt_basique_blanc_homme.avif',
                 'marque' => 'UniWear',
                 'stock' => 120,
@@ -104,7 +105,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'T-shirt basique bleu clair homme',
                 'description' => 'T-shirt léger bleu clair, parfait pour un style estival décontracté.',
-                'prix' => 104.50,
+                'prix' => 32.50,
                 'image' => 'tshirt_basique_bleu_clair_homme.avif',
                 'marque' => 'ColorLine',
                 'stock' => 95,
@@ -114,7 +115,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'T-shirt basique bleu marine homme',
                 'description' => 'T-shirt basique bleu marine, coupe droite et tissu doux pour un confort durable.',
-                'prix' => 104.50,
+                'prix' => 37.00,
                 'image' => 'tshirt_basique_bleu_marine_homme.avif',
                 'marque' => 'Sportify',
                 'stock' => 90,
@@ -124,7 +125,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'T-shirt basique gris chiné homme',
                 'description' => 'T-shirt basique gris chiné, un essentiel polyvalent au quotidien.',
-                'prix' => 99.00,
+                'prix' => 28.00,
                 'image' => 'tshirt_basique_gris_chiné_homme.avif',
                 'marque' => 'UniWear',
                 'stock' => 100,
@@ -134,7 +135,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'T-shirt basique marron homme',
                 'description' => 'T-shirt marron basique avec une teinte chaude et naturelle.',
-                'prix' => 99.00,
+                'prix' => 31.00,
                 'image' => 'tshirt_basique_marron_homme.avif',
                 'marque' => 'ColorLine',
                 'stock' => 80,
@@ -144,7 +145,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'T-shirt basique noir homme',
                 'description' => 'T-shirt noir basique, coupe moderne et tissu résistant pour un usage quotidien.',
-                'prix' => 99.00,
+                'prix' => 34.00,
                 'image' => 'tshirt_basique_noir_homme.avif',
                 'marque' => 'Sportify',
                 'stock' => 120,
@@ -154,7 +155,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'T-shirt basique rose homme',
                 'description' => 'T-shirt rose pâle, une touche de couleur douce pour vos tenues décontractées.',
-                'prix' => 109.90,
+                'prix' => 35.90,
                 'image' => 'tshirt_basique_rose_homme.avif',
                 'marque' => 'ColorLine',
                 'stock' => 70,
@@ -164,7 +165,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'T-shirt basique vert clair homme',
                 'description' => 'T-shirt vert clair basique, léger et agréable à porter pendant l’été.',
-                'prix' => 104.90,
+                'prix' => 33.90,
                 'image' => 'tshirt_basique_vert_claire_homme.avif',
                 'marque' => 'UniWear',
                 'stock' => 85,
@@ -174,7 +175,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'T-shirt basique vert forêt homme',
                 'description' => 'T-shirt vert forêt au ton profond, parfait pour un style naturel et sobre.',
-                'prix' => 109.00,
+                'prix' => 39.00,
                 'image' => 'tshirt_basique_vert_forêt_homme.avif',
                 'marque' => 'Sportify',
                 'stock' => 95,
@@ -185,7 +186,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'T-shirt de luxe beige homme',
                 'description' => 'T-shirt de luxe beige en coton égyptien, douceur et élégance au rendez-vous.',
-                'prix' => 289.00,
+                'prix' => 78.00,
                 'image' => 'tshirt_de_luxe_beige_homme.webp',
                 'marque' => 'EliteWear',
                 'stock' => 40,
@@ -195,7 +196,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'T-shirt de luxe bleu homme',
                 'description' => 'T-shirt bleu de luxe, confection haut de gamme et finitions irréprochables.',
-                'prix' => 299.00,
+                'prix' => 79.00,
                 'image' => 'tshirt_de_luxe_bleu_homme.webp',
                 'marque' => 'EliteWear',
                 'stock' => 35,
@@ -205,7 +206,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'T-shirt de luxe bleu marine homme',
                 'description' => 'T-shirt bleu marine luxueux, coupe ajustée et texture soyeuse.',
-                'prix' => 299.00,
+                'prix' => 75.00,
                 'image' => 'tshirt_de_luxe_bleu_marine_homme.webp',
                 'marque' => 'EliteWear',
                 'stock' => 45,
@@ -215,7 +216,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'T-shirt de luxe gris homme',
                 'description' => 'T-shirt gris haut de gamme, conçu pour allier confort et distinction.',
-                'prix' => 295.00,
+                'prix' => 74.00,
                 'image' => 'tshirt_de_luxe_gris_homme.webp',
                 'marque' => 'EliteWear',
                 'stock' => 50,
@@ -225,7 +226,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'T-shirt de luxe noir homme',
                 'description' => 'T-shirt noir premium en coton égyptien, design minimaliste et coupe parfaite.',
-                'prix' => 299.00,
+                'prix' => 77.00,
                 'image' => 'tshirt_de_luxe_noir_homme.webp',
                 'marque' => 'EliteWear',
                 'stock' => 30,
@@ -235,7 +236,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'T-shirt de luxe rose homme',
                 'description' => 'T-shirt rose luxueux avec une finition satinée et un toucher exceptionnel.',
-                'prix' => 289.00,
+                'prix' => 76.00,
                 'image' => 'tshirt_de_luxe_rose_homme.webp',
                 'marque' => 'EliteWear',
                 'stock' => 40,
@@ -245,7 +246,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'T-shirt de luxe vert clair homme',
                 'description' => 'T-shirt vert clair raffiné, conçu avec des fibres naturelles ultra-douces.',
-                'prix' => 289.00,
+                'prix' => 72.00,
                 'image' => 'tshirt_de_luxe_vert_claire_homme.webp',
                 'marque' => 'EliteWear',
                 'stock' => 35,
@@ -255,7 +256,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'T-shirt de luxe vert homme',
                 'description' => 'T-shirt de luxe vert profond, parfait équilibre entre style et confort.',
-                'prix' => 295.00,
+                'prix' => 73.00,
                 'image' => 'tshirt_de_luxe_vert_homme.webp',
                 'marque' => 'EliteWear',
                 'stock' => 40,
@@ -266,7 +267,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'T-shirt de sport blanc homme',
                 'description' => 'T-shirt de sport blanc respirant, idéal pour les entraînements intenses et le running.',
-                'prix' => 149.90,
+                'prix' => 49.90,
                 'image' => 'tshirt_de_sport_blanc_homme.avif',
                 'marque' => 'FitZone',
                 'stock' => 100,
@@ -276,7 +277,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'T-shirt de sport bleu homme',
                 'description' => 'T-shirt de sport bleu, conçu avec un tissu technique à séchage rapide.',
-                'prix' => 159.90,
+                'prix' => 54.90,
                 'image' => 'tshirt_de_sport_bleu_homme.avif',
                 'marque' => 'FitZone',
                 'stock' => 95,
@@ -286,7 +287,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'T-shirt de sport gris homme',
                 'description' => 'T-shirt de sport gris, respirant et ultra-léger pour un confort maximal.',
-                'prix' => 149.00,
+                'prix' => 47.00,
                 'image' => 'tshirt_de_sport_gris_homme.avif',
                 'marque' => 'FitZone',
                 'stock' => 110,
@@ -296,7 +297,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'T-shirt de sport marron homme',
                 'description' => 'T-shirt de sport marron avec technologie anti-transpiration pour garder la peau sèche.',
-                'prix' => 149.90,
+                'prix' => 52.00,
                 'image' => 'tshirt_de_sport_marron_homme.avif',
                 'marque' => 'FitZone',
                 'stock' => 85,
@@ -306,7 +307,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'T-shirt de sport noir homme',
                 'description' => 'T-shirt de sport noir avec design ergonomique, offre liberté de mouvement totale.',
-                'prix' => 159.90,
+                'prix' => 56.00,
                 'image' => 'tshirt_de_sport_noir_homme.avif',
                 'marque' => 'FitZone',
                 'stock' => 120,
@@ -316,7 +317,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'T-shirt de sport vert foncé homme',
                 'description' => 'T-shirt de sport vert foncé, parfait pour les séances de musculation ou d’extérieur.',
-                'prix' => 159.00,
+                'prix' => 58.00,
                 'image' => 'tshirt_de_sport_vert_foncé_homme.avif',
                 'marque' => 'FitZone',
                 'stock' => 90,
@@ -327,7 +328,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'T-shirt imprimé blanc homme',
                 'description' => 'T-shirt imprimé blanc avec un motif minimaliste, idéal pour un look urbain décontracté.',
-                'prix' => 139.00,
+                'prix' => 38.00,
                 'image' => 'tshirt_imprimé_blanc_homme.avif',
                 'marque' => 'ColorLine',
                 'stock' => 100,
@@ -337,7 +338,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'T-shirt imprimé bleu clair homme',
                 'description' => 'T-shirt bleu clair avec imprimé graphique, parfait pour les tenues estivales.',
-                'prix' => 144.90,
+                'prix' => 36.90,
                 'image' => 'tshirt_imprimé_bleu_clair_homme.avif',
                 'marque' => 'ColorLine',
                 'stock' => 90,
@@ -346,52 +347,29 @@ class ProduitSeeder extends Seeder
             ],
             [
                 'nom' => 'T-shirt imprimé bleu marine homme',
-                'description' => 'T-shirt imprimé bleu marine avec motif moderne et coupe ajustée.',
-                'prix' => 149.00,
+                'description' => 'T-shirt imprimé bleu marine avec motif moderne et coupe confortable.',
+                'prix' => 44.00,
                 'image' => 'tshirt_imprimé_bleu_marine_homme.avif',
-                'marque' => 'ColorLine',
-                'stock' => 85,
-                'genre_id' => $genres['Homme'] ?? 1,
-                'type_produit_id' => $types['T-shirt imprimé'] ?? 2,
-            ],
-            [
-                'nom' => 'T-shirt imprimé marron homme',
-                'description' => 'T-shirt marron avec imprimé vintage, parfait pour un look rétro stylé.',
-                'prix' => 139.50,
-                'image' => 'tshirt_imprimé_marron_homme.avif',
-                'marque' => 'ColorLine',
-                'stock' => 95,
-                'genre_id' => $genres['Homme'] ?? 1,
-                'type_produit_id' => $types['T-shirt imprimé'] ?? 2,
-            ],
-            [
-                'nom' => 'T-shirt imprimé noir homme',
-                'description' => 'T-shirt noir avec imprimé audacieux, idéal pour affirmer votre style.',
-                'prix' => 149.90,
-                'image' => 'tshirt_imprimé_noir_homme.avif',
-                'marque' => 'ColorLine',
-                'stock' => 110,
-                'genre_id' => $genres['Homme'] ?? 1,
-                'type_produit_id' => $types['T-shirt imprimé'] ?? 2,
-            ],
-            [
-                'nom' => 'T-shirt imprimé vert sauge homme',
-                'description' => 'T-shirt vert sauge avec imprimé artistique discret, doux et respirant.',
-                'prix' => 139.90,
-                'image' => 'tshirt_imprimé_vert_sauge_homme.avif',
                 'marque' => 'ColorLine',
                 'stock' => 80,
                 'genre_id' => $genres['Homme'] ?? 1,
                 'type_produit_id' => $types['T-shirt imprimé'] ?? 2,
             ],
-        ]; */
-
-        /* $produits = [
+            [
+                'nom' => 'T-shirt imprimé noir homme',
+                'description' => 'T-shirt noir imprimé avec motif streetwear, idéal pour un look branché.',
+                'prix' => 46.00,
+                'image' => 'tshirt_imprimé_noir_homme.avif',
+                'marque' => 'StreetMood',
+                'stock' => 110,
+                'genre_id' => $genres['Homme'] ?? 1,
+                'type_produit_id' => $types['T-shirt imprimé'] ?? 2,
+            ],
             // Polo Femme
             [
                 'nom' => 'Polo Blanc Bleu Foncé Femme',
                 'description' => 'Polo élégant blanc avec détails bleu foncé, en coton piqué de haute qualité pour un confort optimal.',
-                'prix' => 179.00,
+                'prix' => 79.00,
                 'image' => 'tshirt_polo_blanc_bleu_foncé_femme.avif',
                 'marque' => 'ClassicWear',
                 'stock' => 65,
@@ -401,7 +379,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'Polo Blanc Rayé Femme',
                 'description' => 'Polo blanc avec fines rayures, alliant style sportif et élégance pour une tenue décontractée mais raffinée.',
-                'prix' => 169.00,
+                'prix' => 75.00,
                 'image' => 'tshirt_polo_blanc_rayé_femme.avif',
                 'marque' => 'Sportify',
                 'stock' => 55,
@@ -411,7 +389,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'Polo Bleu Clair Femme',
                 'description' => 'Polo bleu clair en coton respirant, parfait pour les journées ensoleillées et les occasions décontractées.',
-                'prix' => 159.00,
+                'prix' => 69.00,
                 'image' => 'tshirt_polo_bleu_clair_femme.avif',
                 'marque' => 'UniWear',
                 'stock' => 70,
@@ -421,7 +399,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'Polo Bleu Marine Femme',
                 'description' => 'Polo bleu marine classique, intemporel et polyvalent, idéal pour compléter toute garde-robe féminine.',
-                'prix' => 175.00,
+                'prix' => 77.00,
                 'image' => 'tshirt_polo_bleu_marine_femme.avif',
                 'marque' => 'ClassicWear',
                 'stock' => 60,
@@ -431,7 +409,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'Polo Marron Femme',
                 'description' => 'Polo marron élégant en coton doux, offrant confort et style pour un look automnal raffiné.',
-                'prix' => 165.00,
+                'prix' => 72.00,
                 'image' => 'tshirt_polo_marron_femme.avif',
                 'marque' => 'UniWear',
                 'stock' => 45,
@@ -441,7 +419,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'Polo Noir Femme',
                 'description' => 'Polo noir sophistiqué, essentiel pour une tenue chic et facile à associer avec tous vos bas.',
-                'prix' => 169.00,
+                'prix' => 75.00,
                 'image' => 'tshirt_polo_noir_femme.avif',
                 'marque' => 'ClassicWear',
                 'stock' => 80,
@@ -451,7 +429,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'Polo Rouge Femme',
                 'description' => 'Polo rouge vif en coton de qualité, pour ajouter une touche de couleur audacieuse à votre style quotidien.',
-                'prix' => 162.00,
+                'prix' => 71.00,
                 'image' => 'tshirt_polo_rouge_femme.avif',
                 'marque' => 'Sportify',
                 'stock' => 50,
@@ -463,7 +441,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'T-shirt Basique Blanc Femme',
                 'description' => 'T-shirt basique blanc en coton 100%, essentiel intemporel pour toutes les tenues décontractées.',
-                'prix' => 29.00,
+                'prix' => 25.00,
                 'image' => 'tshirt_basique_blanc_femme.avif',
                 'marque' => 'Essential',
                 'stock' => 120,
@@ -473,7 +451,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'T-shirt Basique Blanc Rayé Femme',
                 'description' => 'T-shirt blanc à rayures marinières, style casual et frais pour un look maritime élégant.',
-                'prix' => 34.00,
+                'prix' => 28.00,
                 'image' => 'tshirt_basique_blanc_rayé_femme.avif',
                 'marque' => 'Nautical',
                 'stock' => 85,
@@ -483,7 +461,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'T-shirt Basique Bleu Marine Femme',
                 'description' => 'T-shirt basique bleu marine en coton doux, parfait pour un style minimaliste et confortable.',
-                'prix' => 32.00,
+                'prix' => 27.00,
                 'image' => 'tshirt_basique_bleu_marine_femme.avif',
                 'marque' => 'Essential',
                 'stock' => 95,
@@ -493,7 +471,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'T-shirt Basique Marron Foncé Femme',
                 'description' => 'T-shirt marron foncé en coton biologique, couleur terreuse pour un style naturel et tendance.',
-                'prix' => 36.00,
+                'prix' => 30.00,
                 'image' => 'tshirt_basique_marron_foncé_femme.avif',
                 'marque' => 'EcoWear',
                 'stock' => 65,
@@ -503,7 +481,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'T-shirt Basique Noir Femme',
                 'description' => 'T-shirt basique noir universel, en coton stretch pour un confort et une durabilité exceptionnels.',
-                'prix' => 31.00,
+                'prix' => 26.00,
                 'image' => 'tshirt_basique_noir_femme.avif',
                 'marque' => 'Essential',
                 'stock' => 110,
@@ -513,7 +491,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'T-shirt Basique Rose Poudré Femme',
                 'description' => 'T-shirt rose poudré délicat en coton doux, ajoutant une touche de douceur à votre garde-robe basique.',
-                'prix' => 33.00,
+                'prix' => 29.00,
                 'image' => 'tshirt_basique_rose_poudré_femme.avif',
                 'marque' => 'Pastel',
                 'stock' => 75,
@@ -525,7 +503,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'T-shirt de Luxe Bleu Clair Femme',
                 'description' => 'T-shirt de luxe en soie et coton bleu clair, finition impeccable pour une élégance raffinée au quotidien.',
-                'prix' => 89.00,
+                'prix' => 65.00,
                 'image' => 'tshirt_de_luxe_bleu_clair_femme.webp',
                 'marque' => 'LuxeCotton',
                 'stock' => 40,
@@ -535,7 +513,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'T-shirt de Luxe Gris Femme',
                 'description' => 'T-shirt gris luxueux en jersey de qualité supérieure, coupe ajustée pour un style sophistiqué et contemporain.',
-                'prix' => 92.00,
+                'prix' => 68.00,
                 'image' => 'tshirt_de_luxe_gris_femme.webp',
                 'marque' => 'PremiumWear',
                 'stock' => 35,
@@ -545,7 +523,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'T-shirt de Luxe Jaune Femme',
                 'description' => 'T-shirt jaune soleil en coton égyptien, couleur vibrante et tissu de qualité exceptionnelle.',
-                'prix' => 87.00,
+                'prix' => 63.00,
                 'image' => 'tshirt_de_luxe_jaune_femme.webp',
                 'marque' => 'LuxeCotton',
                 'stock' => 30,
@@ -555,7 +533,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'T-shirt de Luxe Noir Femme',
                 'description' => 'T-shirt noir premium en coton peigné, finition parfaite pour une élégance intemporelle et polyvalente.',
-                'prix' => 95.00,
+                'prix' => 70.00,
                 'image' => 'tshirt_de_luxe_noir_femme.webp',
                 'marque' => 'PremiumWear',
                 'stock' => 45,
@@ -565,7 +543,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'T-shirt de Luxe Orange Femme',
                 'description' => 'T-shirt orange luxueux en tissu respirant, couleur audacieuse pour un style affirmé et raffiné.',
-                'prix' => 85.00,
+                'prix' => 62.00,
                 'image' => 'tshirt_de_luxe_orange_femme.webp',
                 'marque' => 'LuxeCotton',
                 'stock' => 28,
@@ -575,7 +553,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'T-shirt de Luxe Rose Femme',
                 'description' => 'T-shirt rose élégant en coton biologique de qualité supérieure, douceur et confort inégalés.',
-                'prix' => 90.00,
+                'prix' => 67.00,
                 'image' => 'tshirt_de_luxe_rose_femme.webp',
                 'marque' => 'PremiumWear',
                 'stock' => 38,
@@ -585,7 +563,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'T-shirt de Luxe Vert Femme',
                 'description' => 'T-shirt vert luxueux en mélange de lin et coton, couleur naturelle pour un style chic et décontracté.',
-                'prix' => 88.00,
+                'prix' => 64.00,
                 'image' => 'tshirt_de_luxe_vert_femme.webp',
                 'marque' => 'LuxeCotton',
                 'stock' => 32,
@@ -593,7 +571,7 @@ class ProduitSeeder extends Seeder
                 'type_produit_id' => $types['T-shirt de luxe'] ?? 5,
             ],
 
-            // T-shirt de Sport Femme
+            // T-shirt de Sport Femme - CORRIGÉ
             [
                 'nom' => 'T-shirt de Sport Blanc Femme',
                 'description' => 'T-shirt de sport blanc technique en tissu respirant, idéal pour les entraînements intensifs.',
@@ -659,7 +637,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'T-shirt Imprimé Blanc Paris Femme',
                 'description' => 'T-shirt blanc avec impression Paris romantique, pour afficher votre amour de la ville lumière avec style.',
-                'prix' => 39.00,
+                'prix' => 35.00,
                 'image' => 'tshirt_imprimé_blanc_paris_femme.avif',
                 'marque' => 'UrbanPrint',
                 'stock' => 65,
@@ -669,7 +647,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'T-shirt Imprimé Blanc Poésie Femme',
                 'description' => 'T-shirt blanc avec impression poétique délicate, pour les amoureuses de littérature et d\'art.',
-                'prix' => 42.00,
+                'prix' => 38.00,
                 'image' => 'tshirt_imprimé_blanc_poésie_femme.avif',
                 'marque' => 'ArtWear',
                 'stock' => 50,
@@ -679,7 +657,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'T-shirt Imprimé Gris Foncé Femme',
                 'description' => 'T-shirt gris foncé avec impression graphique moderne, pour un style urbain et contemporain.',
-                'prix' => 41.00,
+                'prix' => 37.00,
                 'image' => 'tshirt_imprimé_gris_foncé_femme.avif',
                 'marque' => 'UrbanPrint',
                 'stock' => 58,
@@ -689,7 +667,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'T-shirt Imprimé Marron Foncé Femme',
                 'description' => 'T-shirt marron foncé avec impression ethnique, inspiration bohème pour un style unique et voyageur.',
-                'prix' => 44.00,
+                'prix' => 40.00,
                 'image' => 'tshirt_imprimé_marron_foncé_femme.avif',
                 'marque' => 'BohoStyle',
                 'stock' => 45,
@@ -699,7 +677,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'T-shirt Imprimé Noir Paris Femme',
                 'description' => 'T-shirt noir avec impression Paris stylisée, design audacieux pour un look urbain et sophistiqué.',
-                'prix' => 43.00,
+                'prix' => 39.00,
                 'image' => 'tshirt_imprimé_noir-paris_femme.avif',
                 'marque' => 'UrbanPrint',
                 'stock' => 52,
@@ -709,7 +687,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'T-shirt Imprimé Orange Femme',
                 'description' => 'T-shirt orange vif avec impression géométrique, pour un style énergique et plein de vitalité.',
-                'prix' => 40.00,
+                'prix' => 36.00,
                 'image' => 'tshirt_imprimé_orange_femme.avif',
                 'marque' => 'ArtWear',
                 'stock' => 48,
@@ -719,7 +697,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'T-shirt Imprimé Rose Pêche Femme',
                 'description' => 'T-shirt rose pêche avec impression florale délicate, romantique et féminin pour un style printanier.',
-                'prix' => 38.00,
+                'prix' => 34.00,
                 'image' => 'tshirt_imprimé_rose_pêche_femme.avif',
                 'marque' => 'BohoStyle',
                 'stock' => 55,
@@ -729,7 +707,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'T-shirt Imprimé Rouge Femme',
                 'description' => 'T-shirt rouge avec impression artistique abstraite, pour celles qui osent les couleurs et les designs audacieux.',
-                'prix' => 45.00,
+                'prix' => 41.00,
                 'image' => 'tshirt_imprimé_rouge_femme.avif',
                 'marque' => 'ArtWear',
                 'stock' => 42,
@@ -739,20 +717,18 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'T-shirt Imprimé Vert Femme',
                 'description' => 'T-shirt vert avec impression nature et feuillages, pour un style écologique et connecté à la nature.',
-                'prix' => 41.00,
+                'prix' => 37.00,
                 'image' => 'tshirt_imprimé_vert_femme.avif',
                 'marque' => 'BohoStyle',
                 'stock' => 47,
                 'genre_id' => $genres['Femme'] ?? 2,
                 'type_produit_id' => $types['T-shirt imprimé'] ?? 2,
             ],
-        ]; */
-        $produits = [
             // 🟩 POLOS ENFANT
             [
                 'nom' => 'Polo blanc enfant',
-                'description' => 'Polo blanc classique en coton doux, parfait pour les journées d’école et les sorties décontractées.',
-                'prix' => 139.00,
+                'description' => 'Polo blanc classique en coton doux, parfait pour les journées d\'école et les sorties décontractées.',
+                'prix' => 45.00,
                 'image' => 'tshirt_polo_blanc_enfant.avif',
                 'marque' => 'MiniStyle',
                 'stock' => 60,
@@ -761,8 +737,8 @@ class ProduitSeeder extends Seeder
             ],
             [
                 'nom' => 'Polo bleu clair enfant',
-                'description' => 'Polo bleu clair léger et respirant, idéal pour l’été et les activités en plein air.',
-                'prix' => 145.00,
+                'description' => 'Polo bleu clair léger et respirant, idéal pour l\'été et les activités en plein air.',
+                'prix' => 48.00,
                 'image' => 'tshirt_polo_bleu_clair_enfant.avif',
                 'marque' => 'YoungWear',
                 'stock' => 50,
@@ -772,7 +748,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'Polo bleu marine enfant',
                 'description' => 'Polo bleu marine élégant en coton piqué, alliant confort et style pour les jeunes.',
-                'prix' => 149.00,
+                'prix' => 52.00,
                 'image' => 'tshirt_polo_bleu_marine_enfant.avif',
                 'marque' => 'MiniStyle',
                 'stock' => 70,
@@ -781,8 +757,8 @@ class ProduitSeeder extends Seeder
             ],
             [
                 'nom' => 'Polo rouge enfant',
-                'description' => 'Polo rouge vif pour enfant, une touche de couleur pour un look plein d’énergie.',
-                'prix' => 139.00,
+                'description' => 'Polo rouge vif pour enfant, une touche de couleur pour un look plein d\'énergie.',
+                'prix' => 45.00,
                 'image' => 'tshirt_polo_rouge_enfant.avif',
                 'marque' => 'ColorKid',
                 'stock' => 55,
@@ -792,7 +768,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'Polo vert enfant',
                 'description' => 'Polo vert tendance, conçu pour offrir confort et liberté de mouvement.',
-                'prix' => 135.00,
+                'prix' => 42.00,
                 'image' => 'tshirt_polo_vert_enfant.avif',
                 'marque' => 'EcoLine',
                 'stock' => 65,
@@ -804,7 +780,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'T-shirt basique beige enfant',
                 'description' => 'T-shirt basique beige doux et confortable, idéal pour un usage quotidien.',
-                'prix' => 89.00,
+                'prix' => 25.00,
                 'image' => 'tshirt_basique_beige_enfant.avif',
                 'marque' => 'MiniStyle',
                 'stock' => 80,
@@ -814,7 +790,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'T-shirt basique blanc enfant',
                 'description' => 'T-shirt blanc basique en coton biologique, parfait pour toutes les tenues.',
-                'prix' => 85.00,
+                'prix' => 22.00,
                 'image' => 'tshirt_basique_blanc_enfant.avif',
                 'marque' => 'EcoLine',
                 'stock' => 100,
@@ -824,7 +800,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'T-shirt basique bleu enfant',
                 'description' => 'T-shirt bleu basique à la coupe droite, pour un confort absolu.',
-                'prix' => 92.00,
+                'prix' => 28.00,
                 'image' => 'tshirt_basique_bleu_enfant.avif',
                 'marque' => 'YoungWear',
                 'stock' => 70,
@@ -834,7 +810,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'T-shirt basique vert enfant',
                 'description' => 'T-shirt vert basique au design simple et agréable à porter tous les jours.',
-                'prix' => 90.00,
+                'prix' => 26.00,
                 'image' => 'tshirt_basique_vert_enfant.avif',
                 'marque' => 'MiniStyle',
                 'stock' => 75,
@@ -842,11 +818,11 @@ class ProduitSeeder extends Seeder
                 'type_produit_id' => $types['T-shirt basique'] ?? 1,
             ],
 
-            // 🟥 T-SHIRT DE LUXE ENFANT
+            // 🟥 T-SHIRT DE LUXE ENFANT - CORRIGÉ
             [
                 'nom' => 'T-shirt de luxe blanc enfant',
                 'description' => 'T-shirt blanc de luxe en coton premium, doux et raffiné pour un style chic.',
-                'prix' => 210.00,
+                'prix' => 65.00,
                 'image' => 'tshirt_de_luxe_blanc_enfant.webp',
                 'marque' => 'Petit Luxe',
                 'stock' => 40,
@@ -856,7 +832,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'T-shirt de luxe noir enfant',
                 'description' => 'T-shirt noir de luxe au toucher soyeux et coupe élégante, parfait pour les occasions spéciales.',
-                'prix' => 215.00,
+                'prix' => 68.00,
                 'image' => 'tshirt_de_luxe_noir_enfant.webp',
                 'marque' => 'Petit Luxe',
                 'stock' => 35,
@@ -868,7 +844,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'T-shirt de sport blanc enfant',
                 'description' => 'T-shirt de sport blanc respirant, parfait pour les entraînements et les jeux extérieurs.',
-                'prix' => 120.00,
+                'prix' => 35.00,
                 'image' => 'tshirt_de_sport_blanc_enfant.avif',
                 'marque' => 'ActiveKid',
                 'stock' => 90,
@@ -878,7 +854,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'T-shirt de sport noir enfant',
                 'description' => 'T-shirt de sport noir anti-transpiration, offrant confort et performance.',
-                'prix' => 125.00,
+                'prix' => 38.00,
                 'image' => 'tshirt_de_sport_noir_enfant.avif',
                 'marque' => 'ActiveKid',
                 'stock' => 85,
@@ -888,7 +864,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'T-shirt de sport rose enfant',
                 'description' => 'T-shirt rose vif pour enfant, conçu pour le sport et les activités dynamiques.',
-                'prix' => 119.00,
+                'prix' => 33.00,
                 'image' => 'tshirt_de_sport_rose_enfant.avif',
                 'marque' => 'ActiveKid',
                 'stock' => 75,
@@ -900,7 +876,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'T-shirt imprimé beige enfant',
                 'description' => 'T-shirt beige imprimé avec motif amusant, idéal pour un look décontracté.',
-                'prix' => 99.00,
+                'prix' => 29.00,
                 'image' => 'tshirt_de_imprimé_beige_enfant.avif',
                 'marque' => 'FunStyle',
                 'stock' => 80,
@@ -910,7 +886,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'T-shirt imprimé blanc enfant',
                 'description' => 'T-shirt blanc imprimé avec design coloré, pour un style original et joyeux.',
-                'prix' => 105.00,
+                'prix' => 32.00,
                 'image' => 'tshirt_de_imprimé_blanc_enfant.avif',
                 'marque' => 'ColorKid',
                 'stock' => 70,
@@ -920,7 +896,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'T-shirt imprimé bleu clair enfant',
                 'description' => 'T-shirt bleu clair imprimé à motif graphique, doux et tendance.',
-                'prix' => 102.00,
+                'prix' => 31.00,
                 'image' => 'tshirt_de_imprimé_bleu_clair_enfant.avif',
                 'marque' => 'FunStyle',
                 'stock' => 65,
@@ -930,7 +906,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'T-shirt imprimé bleu enfant',
                 'description' => 'T-shirt bleu imprimé avec motif amusant, parfait pour tous les jours.',
-                'prix' => 99.00,
+                'prix' => 29.00,
                 'image' => 'tshirt_de_imprimé_bleu_enfant.avif',
                 'marque' => 'MiniStyle',
                 'stock' => 85,
@@ -940,7 +916,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'T-shirt imprimé gris foncé enfant',
                 'description' => 'T-shirt gris foncé imprimé à motif moderne, idéal pour un look urbain.',
-                'prix' => 108.00,
+                'prix' => 34.00,
                 'image' => 'tshirt_de_imprimé_gris_foncé_enfant.avif',
                 'marque' => 'YoungWear',
                 'stock' => 60,
@@ -950,7 +926,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'T-shirt imprimé noir enfant',
                 'description' => 'T-shirt noir imprimé avec design audacieux, pour un style affirmé.',
-                'prix' => 112.00,
+                'prix' => 36.00,
                 'image' => 'tshirt_de_imprimé_noir_enfant.avif',
                 'marque' => 'ColorKid',
                 'stock' => 55,
@@ -960,7 +936,7 @@ class ProduitSeeder extends Seeder
             [
                 'nom' => 'T-shirt imprimé vert enfant',
                 'description' => 'T-shirt vert imprimé au motif naturel, léger et agréable à porter.',
-                'prix' => 101.00,
+                'prix' => 30.00,
                 'image' => 'tshirt_de_imprimé_vert_enfant.avif',
                 'marque' => 'FunStyle',
                 'stock' => 68,
@@ -968,6 +944,7 @@ class ProduitSeeder extends Seeder
                 'type_produit_id' => $types['T-shirt imprimé'] ?? 2,
             ],
         ];
+
 
         foreach ($produits as $produit) {
             Produit::create($produit);
