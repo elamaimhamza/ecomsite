@@ -35,5 +35,17 @@ class UtilisateurSeeder extends Seeder
             'ville' => 'Lyon',
             'type_utilisateur' => 'Visiteur',
         ]);
+
+        Utilisateur::create([
+            'nom' => 'elamaim',
+            'prenom' => 'hamza',
+            'email' => 'admin@gmail.com',
+            'mot_de_passe' => Hash::make('123456'),
+            'adresse' => '15 avenue des Champs',
+            'code_postal' => '69000',
+            'ville' => 'Lyon',
+            'type_utilisateur' => 'Gestionnaire',
+        ]);
+
     }
 }
