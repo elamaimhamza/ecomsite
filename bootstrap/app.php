@@ -14,6 +14,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->alias([
             'auth.api' => \App\Http\Middleware\AuthApiMiddleware::class,
+            'gestionnaire' => \App\Http\Middleware\GestionnaireMiddleware::class
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

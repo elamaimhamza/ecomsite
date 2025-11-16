@@ -68,9 +68,16 @@ class ProduitController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Produit $produit)
+    public function update(Request $request, $id)
     {
-        //
+        $prix = $request->input("prix");
+        if (is_null($prix)) {
+            return response()->json(["message" => "prix est obligé"], 400);
+        }
+        $description = $request->input("description");
+        $produit = Produit::find($id);
+        $produit->update(["prix" => $prix, "description" => $description]);
+        return response()->json(["message" => "product to update", "id" => $id, "produit" => $produit, $prix, $description]);
     }
 
     /**

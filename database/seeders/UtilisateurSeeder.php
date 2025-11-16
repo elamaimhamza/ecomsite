@@ -46,6 +46,5 @@ class UtilisateurSeeder extends Seeder
             'ville' => 'Lyon',
             'type_utilisateur' => 'Gestionnaire',
         ]);
-
     }
 }
