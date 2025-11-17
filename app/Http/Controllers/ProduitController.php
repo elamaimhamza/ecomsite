@@ -6,6 +6,8 @@ use App\Models\Genre;
 use App\Models\Produit;
 use Illuminate\Http\Request;
 
+use function PHPUnit\Framework\isEmpty;
+
 class ProduitController extends Controller
 {
     /**
@@ -55,6 +57,13 @@ class ProduitController extends Controller
     {
         $produit = Produit::with(['genre', 'typeProduit', 'referencement'])->findOrFail($id);
         return response()->json($produit);
+    }
+
+    public function getProducts(Request $request)
+    {
+        $produitsList = $request->input('produitsIds');
+        $produits = Produit::find($produitsList);
+        return response()->json(["produits" => $produits]);
     }
 
     /**

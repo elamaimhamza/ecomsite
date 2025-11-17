@@ -26,4 +26,5 @@ Route::middleware(['auth.api', 'gestionnaire'])->group(function () {
 });
 
 Route::post('/produits', [ProduitController::class, 'index']);
+Route::post('/produits/list', [ProduitController::class, 'getProducts']);
 Route::get('/produits/{id}', [ProduitController::class, 'show']);
