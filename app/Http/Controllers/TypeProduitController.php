@@ -12,7 +12,12 @@ class TypeProduitController extends Controller
      */
     public function index()
     {
-        //
+
+        // Simulation de la récupération des données via le modèle:
+        $productTypes = TypeProduit::all()->toArray();
+
+        // Retourne la liste au format JSON
+        return response()->json($productTypes);
     }
 
     /**

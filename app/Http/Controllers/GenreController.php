@@ -12,7 +12,11 @@ class GenreController extends Controller
      */
     public function index()
     {
-        //
+        // Simulation de la récupération des données via le modèle:
+        $genres = Genre::all()->toArray();
+
+        // Retourne la liste au format JSON
+        return response()->json($genres);
     }
 
     /**
