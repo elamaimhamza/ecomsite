@@ -26,8 +26,9 @@ Route::middleware('auth.api')->group(function () {
 Route::middleware(['auth.api', 'gestionnaire'])->group(function () {
     Route::put("/produit/{id}", [ProduitController::class, 'update']);
     Route::put("/admin/produits/{id}", [ProduitController::class, 'updateAdmin']);
-    // Route::get("/admin/produits/{id}", [ProduitController::class, 'getProductData']);
     Route::get("/admin/produits", [ProduitController::class, 'getAll']);
+    Route::post("/admin/produits", [ProduitController::class, 'store']);
+    Route::delete("/admin/produits/{id}", [ProduitController::class, 'destroy']);
     Route::get("/admin/produits/types", [TypeProduitController::class, 'index']);
     Route::get("/admin/produits/genres", [GenreController::class, 'index']);
 });

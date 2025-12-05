@@ -95,7 +95,8 @@ class ProduitController extends Controller
     }
 
     public function updateAdmin(Request $request, $id)
-    { // 1. Validation Rules
+    {
+        // 1. Validation Rules
         $validator = Validator::make($request->all(), [
             'nom'   => 'sometimes|required|string|max:255|unique:produits,nom,' . $id,
             'description'   => 'sometimes|string',
@@ -103,7 +104,6 @@ class ProduitController extends Controller
             'stock'         => 'sometimes|required|integer|min:0',
             'genre_id'      => 'sometimes|required|exists:genres,id',
             'type_produit_id' => 'sometimes|required|exists:type_produits,id',
-            // Add more fields as necessary
         ]);
 
         if ($validator->fails()) {
@@ -123,12 +123,7 @@ class ProduitController extends Controller
                 ], 404); // 404 Not Found
             }
 
-            // --- Optional: Authorization check (e.g., check if user can edit this product) ---
-            // $this->authorize('update', $produit); 
-
             // 3. Update Attributes
-            // The fill() method handles mass assignment and automatically only updates fields 
-            // that are present in the request and are fillable in the model ($fillable property).
             $produit->fill($request->all());
             $produit->save();
 
@@ -159,7 +154,45 @@ class ProduitController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // 1. Validation of the incoming data
+        // We ensure all required fields from your React form are present and valid.
+        $validator = Validator::make($request->all(), [
+            'nom'             => 'required|string|max:255',
+            'prix'            => 'required|numeric|min:0',
+            'stock'           => 'required|integer|min:0',
+
+            // Validate that these IDs actually exist in their respective tables
+            // Adjust 'type_produits' and 'genres' to match your actual database table names
+            'type_produit_id' => 'required|exists:type_produits,id',
+            'genre_id'        => 'required|exists:genres,id',
+
+            // Based on your React component, you are sending a URL string
+            'image'           => 'nullable|url|max:2048',
+            'description'     => 'nullable|string',
+
+            // 'marque' is in your $fillable, but was not in the React form. 
+            // We make it nullable here.
+            'marque'          => 'nullable|string|max:255',
+        ]);
+
+        // 2. Return errors if validation fails
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 'error',
+                'errors' => $validator->errors()
+            ], 422); // 422 Unprocessable Entity
+        }
+
+        // 3. Create the product
+        // Since $fillable is set correctly in your model, we can pass the validated data directly.
+        $product = Produit::create($validator->validated());
+
+        // 4. Return the response
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Produit créé avec succès !',
+            'data' => $product
+        ], 201); // 201 Created
     }
 
     /**
@@ -176,14 +209,6 @@ class ProduitController extends Controller
         $produitsList = $request->input('produitsIds');
         $produits = Produit::find($produitsList);
         return response()->json(["produits" => $produits]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Produit $produit)
-    {
-        //
     }
 
     /**
@@ -204,8 +229,44 @@ class ProduitController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Produit $produit)
+    public function destroy($id)
     {
-        //
+        // 1. Find the product by ID
+        $product = Produit::find($id);
+
+        // 2. Check if the product exists
+        if (!$product) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Produit non trouvé.'
+            ], 404);
+        }
+
+        try {
+            // 3. (Optional) Delete the associated image if it is a local file
+            // Since your current setup uses a URL string, this isn't strictly necessary yet.
+            // But if you switch to file uploads later, you would uncomment this:
+            /*
+            if ($product->image && \Storage::exists('public/' . $product->image)) {
+                \Storage::delete('public/' . $product->image);
+            }
+            */
+
+            // 4. Delete the record from the database
+            $product->delete();
+
+            // 5. Return success response
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Produit supprimé avec succès.'
+            ], 200);
+        } catch (\Exception $e) {
+            // Handle Foreign Key constraints (e.g., Product is inside an Order)
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Impossible de supprimer ce produit car il est lié à d\'autres données (commandes, paniers, etc.).',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 }
