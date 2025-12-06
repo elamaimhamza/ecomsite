@@ -42,8 +42,8 @@ class ProduitController extends Controller
         $perPage = $request->get('per_page', 15);
 
         // Get sorting parameters
-        $sortBy = $request->get('sort_by', 'created_at'); // Default sort column
-        $sortOrder = $request->get('sort_order', 'desc'); // Default sort order (asc or desc)
+        $sortBy = $request->get('sort_by', 'id'); // Default sort column
+        $sortOrder = $request->get('sort_order', 'asc'); // Default sort order (asc or desc)
 
         // Ensure sort order is valid
         if (!in_array(strtolower($sortOrder), ['asc', 'desc'])) {
@@ -80,7 +80,24 @@ class ProduitController extends Controller
 
             return response()->json([
                 "message" => "Products fetched successfully",
-                "data" => $produits,
+                "data" => [
+                    // 1. Get the actual array of product objects
+                    "products" => $produits->items(),
+
+                    // 2. Manually construct the meta object
+                    "meta" => [
+                        "current_page" => $produits->currentPage(),
+                        "last_page"    => $produits->lastPage(),
+                        "per_page"     => $produits->perPage(),
+                        "total"        => $produits->total(),
+                        "from"         => $produits->firstItem(),
+                        "to"           => $produits->lastItem(),
+                        "links"        => $produits->linkCollection(),
+                        // Optional: Include Next/Prev URLs
+                        "next_page_url" => $produits->nextPageUrl(),
+                        "prev_page_url" => $produits->previousPageUrl(),
+                    ]
+                ],
             ]);
         } catch (\Exception $e) { // Use the base \Exception for more generic error capture
             // Log the error for debugging purposes (optional but recommended)
