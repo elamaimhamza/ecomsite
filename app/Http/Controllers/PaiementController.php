@@ -86,7 +86,7 @@ class PaiementController extends Controller
             $commande = Commande::create([
                 'utilisateur_id' => $user->id,
                 'montant_total' => $totalAmount,
-                'statut' => 'En attente', // Matches your Enum
+                'statut' => 'Payée', // Matches your Enum
             ]);
 
             // 5. Create "LigneCommande" Records
