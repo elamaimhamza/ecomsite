@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-         Schema::create('commandes', function (Blueprint $table) {
+        Schema::create('commandes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('utilisateur_id')->constrained('utilisateurs')->onDelete('cascade');
             $table->decimal('montant_total', 10, 2);
-            $table->enum('statut', ['En attente', 'Payée', 'Expédiée', 'Livrée', 'Annulée'])->default('En attente');
+            $table->enum('statut', ['Payée', 'Expédiée', 'Livrée', 'Annulée'])->default('Payée');
             $table->timestamps();
         });
     }

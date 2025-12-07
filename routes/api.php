@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CommandeController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\PaiementController;
 use App\Http\Controllers\ProduitController;
@@ -33,6 +34,10 @@ Route::middleware(['auth.api', 'gestionnaire'])->group(function () {
     Route::delete("/admin/produits/{id}", [ProduitController::class, 'destroy']);
     Route::get("/admin/produits/types", [TypeProduitController::class, 'index']);
     Route::get("/admin/produits/genres", [GenreController::class, 'index']);
+
+    Route::get('/admin/commandes', [CommandeController::class, 'index']);
+    Route::put('/admin/commandes/{id}/status', [CommandeController::class, 'updateStatus']);
+    Route::get('/admin/commandes/{id}', [CommandeController::class, 'show']);
 });
 
 Route::post('/produits', [ProduitController::class, 'index']);

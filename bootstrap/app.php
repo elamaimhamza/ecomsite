@@ -16,6 +16,10 @@ return Application::configure(basePath: dirname(__DIR__))
             'auth.api' => \App\Http\Middleware\AuthApiMiddleware::class,
             'gestionnaire' => \App\Http\Middleware\GestionnaireMiddleware::class
         ]);
+
+        $middleware->validateCsrfTokens(except: [
+            'api/stripe/webhook', // Exclude webhook route
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
