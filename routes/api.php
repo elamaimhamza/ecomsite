@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GenreController;
+use App\Http\Controllers\PaiementController;
 use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\TypeProduitController;
 use App\Http\Controllers\UtilisateurController;
@@ -21,6 +22,7 @@ Route::post('/verify', [AuthController::class, 'verify']);
 Route::middleware('auth.api')->group(function () {
     Route::get('/user', [UtilisateurController::class, 'show']);
     Route::put('/user', [UtilisateurController::class, 'update']);
+    Route::post('/create-checkout-session', [PaiementController::class, 'createCheckoutSession']);
 });
 
 Route::middleware(['auth.api', 'gestionnaire'])->group(function () {
