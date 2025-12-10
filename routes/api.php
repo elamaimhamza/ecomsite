@@ -23,6 +23,8 @@ Route::post('/verify', [AuthController::class, 'verify']);
 Route::middleware('auth.api')->group(function () {
     Route::get('/user', [UtilisateurController::class, 'show']);
     Route::put('/user', [UtilisateurController::class, 'update']);
+    Route::get('/commandes', [CommandeController::class, 'getUserOrders']);
+    Route::get('/commandes/{id}', [CommandeController::class, 'getOneOrder']);
     Route::post('/create-checkout-session', [PaiementController::class, 'createCheckoutSession']);
 });
 

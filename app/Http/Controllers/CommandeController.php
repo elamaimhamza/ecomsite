@@ -47,19 +47,46 @@ class CommandeController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Display a listing of the resource for the logged-in user.
      */
-    public function create()
+    public function getUserOrders(Request $request)
     {
-        //
+        // 1. Get the authenticated user's ID
+        $user = $request->get('auth_user');
+        $userId = $user->id;
+        // 2. Query commands specifically for this user
+        // Assuming your foreign key is 'utilisateur_id' based on your relation name
+        $commandes = Commande::where('utilisateur_id', $userId)
+            ->with('ligneCommandes')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return response()->json([
+            'commandes' => $commandes
+        ]);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Display the specified resource.
      */
-    public function store(Request $request)
+    public function getOneOrder(Request $request, $id)
     {
-        //
+        $userId = $request->get('auth_user')->id;
+
+        // 1. Find the order where ID matches AND user matches
+        $commande = Commande::where('id', $id)
+            ->where('utilisateur_id', $userId) // Security check
+            ->with(['ligneCommandes.produit', 'livraison']) // Eager load items and their products
+            ->first();
+
+        // 2. If not found or not owned by user, return error
+        if (!$commande) {
+            return response()->json(['message' => 'Commande introuvable ou accès refusé'], 404);
+        }
+
+        return response()->json([
+            'commande' => $commande
+        ]);
     }
 
     /**
@@ -74,22 +101,6 @@ class CommandeController extends Controller
         ])->findOrFail($id);
 
         return response()->json($commande);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Commande $commande)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Commande $commande)
-    {
-        //
     }
 
     /**
