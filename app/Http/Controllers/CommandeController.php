@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Commande;
 use Illuminate\Http\Request;
+use App\Mail\OrderStatusUpdated;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Log;
 
 class CommandeController extends Controller
 {
@@ -30,15 +33,33 @@ class CommandeController extends Controller
     {
         // 1. Validate that the status is one of your Enum values
         $validated = $request->validate([
-            'statut' => 'required|in:En attente,Payée,Expédiée,Livrée,Annulée'
+            'statut' => 'required|in:Payée,Expédiée,Livrée,Annulée'
         ]);
 
-        // 2. Find and Update
-        $commande = Commande::findOrFail($id);
+        // 2. Find the order AND the user (needed for the email)
+        $commande = Commande::with('utilisateur')->findOrFail($id);
 
-        $commande->update([
-            'statut' => $validated['statut']
-        ]);
+        // Check if the status is actually different before updating
+        // This prevents sending an email if the admin clicks "Update" without changing anything
+        if ($commande->statut !== $validated['statut']) {
+
+            // Update the status
+            $commande->update([
+                'statut' => $validated['statut']
+            ]);
+
+            // 3. Send Email Notification
+            try {
+                // Check if user exists (just in case the user was deleted but order remains)
+                if ($commande->utilisateur) {
+                    Mail::to($commande->utilisateur->email)
+                        ->send(new OrderStatusUpdated($commande));
+                }
+            } catch (\Exception $e) {
+                // Log the error so you can debug it, but don't break the API response
+                Log::error("Failed to send order update email for Order ID {$id}: " . $e->getMessage());
+            }
+        }
 
         return response()->json([
             'message' => 'Statut mis à jour avec succès',
