@@ -5,6 +5,7 @@ use App\Http\Controllers\CommandeController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\PaiementController;
 use App\Http\Controllers\ProduitController;
+use App\Http\Controllers\StatsController;
 use App\Http\Controllers\TypeProduitController;
 use App\Http\Controllers\UtilisateurController;
 use Database\Seeders\ProduitSeeder;
@@ -40,6 +41,8 @@ Route::middleware(['auth.api', 'gestionnaire'])->group(function () {
     Route::get('/admin/commandes', [CommandeController::class, 'index']);
     Route::put('/admin/commandes/{id}/status', [CommandeController::class, 'updateStatus']);
     Route::get('/admin/commandes/{id}', [CommandeController::class, 'show']);
+
+    Route::get('/stats', [StatsController::class, 'index']);
 });
 
 Route::post('/produits', [ProduitController::class, 'index']);
