@@ -63,7 +63,7 @@
 
         <div style="text-align: center;">
             {{-- Adjust URL to match your frontend URL --}}
-            <a href="{{ env('FRONTEND_URL', 'http://localhost:5173') }}/mes-commandes/{{ $commande->id }}"
+            <a href="{{ env('FRONTEND_URL', 'http://localhost:5173') }}/"
                 style="background-color: #4f46e5; 
                       color: #ffffff; 
                       padding: 14px 28px; 
