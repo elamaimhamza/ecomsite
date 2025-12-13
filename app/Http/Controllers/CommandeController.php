@@ -97,7 +97,7 @@ class CommandeController extends Controller
         // 1. Find the order where ID matches AND user matches
         $commande = Commande::where('id', $id)
             ->where('utilisateur_id', $userId) // Security check
-            ->with(['ligneCommandes.produit', 'livraison']) // Eager load items and their products
+            ->with(['ligneCommandes.produit', 'livraison.transporteur']) // Eager load items and their products
             ->first();
 
         // 2. If not found or not owned by user, return error
@@ -118,7 +118,8 @@ class CommandeController extends Controller
         $commande = Commande::with([
             'utilisateur',
             // Load line items AND the associated product details (for images)
-            'ligneCommandes.produit'
+            'ligneCommandes.produit',
+            'livraison.transporteur'
         ])->findOrFail($id);
 
         return response()->json($commande);

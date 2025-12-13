@@ -22,7 +22,7 @@ class UtilisateurSeeder extends Seeder
             'adresse' => '10 rue des Lilas',
             'code_postal' => '75000',
             'ville' => 'Paris',
-            'type_utilisateur' => 'Visiteur',
+            'type_utilisateur' => 'Membre',
         ]);
 
         Utilisateur::create([
@@ -33,7 +33,7 @@ class UtilisateurSeeder extends Seeder
             'adresse' => '15 avenue des Champs',
             'code_postal' => '69000',
             'ville' => 'Lyon',
-            'type_utilisateur' => 'Visiteur',
+            'type_utilisateur' => 'Membre',
         ]);
 
         Utilisateur::create([

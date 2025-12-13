@@ -5,16 +5,11 @@ use App\Http\Controllers\CommandeController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\PaiementController;
 use App\Http\Controllers\ProduitController;
-use App\Http\Controllers\StatsController;
+use App\Http\Controllers\StatistiqueController;
+use App\Http\Controllers\TransporteurController;
 use App\Http\Controllers\TypeProduitController;
 use App\Http\Controllers\UtilisateurController;
-use Database\Seeders\ProduitSeeder;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
-// Route::get('/user', function (Request $request) {
-//     return $request->user();
-// })->middleware('auth:sanctum');
 
 Route::post('/register', [UtilisateurController::class, 'store']);
 Route::post('/login', [AuthController::class, 'login']);
@@ -42,9 +37,11 @@ Route::middleware(['auth.api', 'gestionnaire'])->group(function () {
     Route::put('/admin/commandes/{id}/status', [CommandeController::class, 'updateStatus']);
     Route::get('/admin/commandes/{id}', [CommandeController::class, 'show']);
 
-    Route::get('/stats', [StatsController::class, 'index']);
+    Route::get('/stats', [StatistiqueController::class, 'index']);
 });
 
 Route::post('/produits', [ProduitController::class, 'index']);
 Route::post('/produits/list', [ProduitController::class, 'getProducts']);
 Route::get('/produits/{id}', [ProduitController::class, 'show']);
+Route::get('/delivery-options', [TransporteurController::class, 'index']);
+    

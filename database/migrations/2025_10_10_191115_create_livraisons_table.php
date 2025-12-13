@@ -11,13 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-       Schema::create('livraisons', function (Blueprint $table) {
+        Schema::create('livraisons', function (Blueprint $table) {
             $table->id();
             $table->foreignId('commande_id')->constrained('commandes')->onDelete('cascade');
             $table->string('adresse_livraison');
             $table->string('mode_livraison')->nullable();
             $table->timestamp('date_expedition')->nullable();
             $table->timestamp('date_livraison')->nullable();
+            // Links to the static provider info
+            $table->foreignId('transporteur_id')->nullable()->constrained('transporteurs');
+
+            // The specific tracking code for this order
+            $table->string('numero_suivi')->nullable();
             $table->timestamps();
         });
     }

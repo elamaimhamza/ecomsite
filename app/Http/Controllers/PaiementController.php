@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Commande;
 use App\Models\LigneCommande;
+use App\Models\Livraison;
 use App\Models\Paiement;
 use App\Models\Produit;
+use App\Models\Transporteur;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Stripe\Stripe;
@@ -23,39 +25,38 @@ class PaiementController extends Controller
         }
 
         $items = $request->input('items');
-        $delivery = $request->input('delivery');
-        $email = $request->input('email') ?? $user->email;
+        $deliveryInput = $request->input('delivery');
+
+        // USE USER DATA DIRECTLY
+        $userEmail = $user->email;
+        $userAddress = $user->adresse;
 
         // Start Transaction to ensure data integrity
-        return DB::transaction(function () use ($request, $user, $items, $delivery, $email) {
+        return DB::transaction(function () use ($user, $items, $deliveryInput, $userEmail, $userAddress) {
 
-            // 1. Initialize Stripe
             Stripe::setApiKey(env('STRIPE_SECRET'));
 
             $lineItems = [];
             $totalAmount = 0;
             $dbOrderLines = [];
 
-            // 2. Process Products (Fetch Price from DB)
+            // 2. Process Products
             foreach ($items as $item) {
                 $product = Produit::find($item['id']);
 
                 if ($product) {
                     $quantity = $item['quantity'];
-                    $price = $product->prix; // Assuming column is 'prix'
+                    $price = $product->prix;
                     $totalAmount += $price * $quantity;
 
-                    // Prepare data for LigneCommande
                     $dbOrderLines[] = [
                         'produit_id' => $product->id,
                         'quantite' => $quantity,
                         'prix_unitaire' => $price,
-                        // timestamps are handled by Eloquent usually, or manually here
                         'created_at' => now(),
                         'updated_at' => now(),
                     ];
 
-                    // Prepare Stripe Line Item
                     $lineItems[] = [
                         'price_data' => [
                             'currency' => 'eur',
@@ -67,49 +68,64 @@ class PaiementController extends Controller
                 }
             }
 
-            // 3. Process Delivery
-            if ($delivery && isset($delivery['price'])) {
-                $deliveryPrice = floatval($delivery['price']);
-                $totalAmount += $deliveryPrice;
+            // 3. Process Delivery (Secure DB Lookup)
+            $transporteur = null;
 
-                $lineItems[] = [
-                    'price_data' => [
-                        'currency' => 'eur',
-                        'product_data' => ['name' => "Livraison: " . $delivery['title']],
-                        'unit_amount' => intval($deliveryPrice * 100),
-                    ],
-                    'quantity' => 1,
-                ];
+            if ($deliveryInput && isset($deliveryInput['id'])) {
+                $transporteur = Transporteur::where('id', $deliveryInput['id'])->first();
+
+                if ($transporteur) {
+                    $deliveryPrice = $transporteur->prix;
+                    $totalAmount += $deliveryPrice;
+
+                    $lineItems[] = [
+                        'price_data' => [
+                            'currency' => 'eur',
+                            'product_data' => ['name' => "Livraison: " . $transporteur->nom],
+                            'unit_amount' => intval($deliveryPrice * 100),
+                        ],
+                        'quantity' => 1,
+                    ];
+                }
             }
 
-            // 4. Create "Commande" Record
+            // 4. Create Commande
             $commande = Commande::create([
                 'utilisateur_id' => $user->id,
                 'montant_total' => $totalAmount,
-                'statut' => 'Payée', // Matches your Enum
+                'statut' => 'Payée',
             ]);
 
-            // 5. Create "LigneCommande" Records
-            // We map the ID of the newly created command
+            // 5. Insert Order Lines
             foreach ($dbOrderLines as &$line) {
                 $line['commande_id'] = $commande->id;
             }
             LigneCommande::insert($dbOrderLines);
 
-            // 6. Create Stripe Session
+            // 6. Create Delivery Record (Using User's Address)
+            if ($transporteur) {
+                Livraison::create([
+                    'commande_id' => $commande->id,
+                    'transporteur_id' => $transporteur->id,
+                    'mode_livraison' => $transporteur->nom,
+                    'adresse_livraison' => $userAddress, // Saved from User Profile
+                    'numero_suivi' => null,
+                ]);
+            }
+
+            // 7. Create Stripe Session
             $session = Session::create([
                 'payment_method_types' => ['card', 'bancontact'],
                 'line_items' => $lineItems,
                 'mode' => 'payment',
-                'customer_email' => $email,
+                'customer_email' => $userEmail, // Pre-fills Stripe email field
                 'success_url' => env('CLIENT_URL') . '/success?session_id={CHECKOUT_SESSION_ID}',
                 'cancel_url' => env('CLIENT_URL') . '/cart',
                 'metadata' => [
-                    'commande_id' => $commande->id, // Important link for Webhook
+                    'commande_id' => $commande->id,
                 ],
             ]);
 
-            // 7. Update Commande with Stripe Session ID
             $commande->update(['stripe_session_id' => $session->id]);
 
             return response()->json(['url' => $session->url]);
